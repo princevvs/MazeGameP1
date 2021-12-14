@@ -64,5 +64,5 @@ def setup_maze(level):
             #Check if it is an X
             if character == "X":
                 pen.goto(screen_x, screen_y)
-                pen.stamp()
+                pen.stam()
 
