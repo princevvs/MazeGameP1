@@ -23,6 +23,18 @@ class Player(turtle.Turtle):
         self.penup()
         self.speed(0)
 
+    def go_up(self):
+        self.goto(self.xcor(), self.ycor() + 24)
+
+    def go_down(self):
+        self.goto(self.xcor(), self.ycor() - 24)
+
+    def go_left(self):
+        self.goto(self.xcor() - 24, self.ycor())
+
+    def go_right(self):
+        self.goto(self.xcor() + 24, self.ycor())
+
 # Create levels list
 levels = [""]
 
@@ -84,6 +96,13 @@ player = Player()
 
 #Set up the level
 setup_maze(levels[1])
+
+#Keyboard Binding 
+turtle.listen()
+turtle.onkey(player.go_left,"Left")
+turtle.onkey(player.go_right,"Right")
+turtle.onkey(player.go_up,"Up")
+turtle.onkey(player.go_down,"Down")
 
 #Main Game Loop 
 while True:
