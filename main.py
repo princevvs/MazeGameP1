@@ -24,16 +24,44 @@ class Player(turtle.Turtle):
         self.speed(0)
 
     def go_up(self):
-        self.goto(self.xcor(), self.ycor() + 24)
+        #self.goto(self.xcor(), self.ycor() + 24)
+        #Calculate the spot to move to
+        move_to_x = player.xcor()
+        move_to_y = player.ycor() + 24
+
+        #Check if the space has a wall 
+        if (move_to_x, move_to_y) not in walls:
+            self.goto(move_to_x, move_to_y)
 
     def go_down(self):
-        self.goto(self.xcor(), self.ycor() - 24)
+        #self.goto(self.xcor(), self.ycor() - 24)
+        #Calculate the spot to move to
+        move_to_x = player.xcor()
+        move_to_y = player.ycor() - 24
+
+        #Check if the space has a wall 
+        if (move_to_x, move_to_y) not in walls:
+            self.goto(move_to_x, move_to_y)
 
     def go_left(self):
-        self.goto(self.xcor() - 24, self.ycor())
+        #self.goto(self.xcor() - 24, self.ycor())
+        #Calculate the spot to move to
+        move_to_x = player.xcor() + 24
+        move_to_y = player.ycor()
+
+        #Check if the space has a wall 
+        if (move_to_x, move_to_y) not in walls:
+            self.goto(move_to_x, move_to_y)
 
     def go_right(self):
-        self.goto(self.xcor() + 24, self.ycor())
+        #self.goto(self.xcor() + 24, self.ycor())
+        #Calculate the spot to move to
+        move_to_x = player.xcor() - 24
+        move_to_y = player.ycor()
+
+        #Check if the space has a wall 
+        if (move_to_x, move_to_y) not in walls:
+            self.goto(move_to_x, move_to_y)        
 
 # Create levels list
 levels = [""]
@@ -85,7 +113,9 @@ def setup_maze(level):
             if character == "X":
                 pen.goto(screen_x, screen_y)
                 pen.stamp()
-
+                #Add coordinates to wall list 
+                walls.append((screen_x, screen_y))
+                
             #Check if it is a P (representing the player)
             if character == "P":
                 player.goto(screen_x, screen_y)
@@ -94,8 +124,12 @@ def setup_maze(level):
 pen = pen()
 player = Player()
 
+#Create wall coordinate list 
+walls = []
+
 #Set up the level
 setup_maze(levels[1])
+print (walls)
 
 #Keyboard Binding 
 turtle.listen()
